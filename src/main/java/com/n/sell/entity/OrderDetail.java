@@ -2,6 +2,7 @@ package com.n.sell.entity;
 
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import java.util.Date;
 
 @Entity
 @DynamicUpdate
+@DynamicInsert
 @Data
 public class OrderDetail {
 

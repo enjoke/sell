@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum ProductStatus {
-    ON_SALE(0, "上架"),
-    OUT_SALE(1, "下架")
+    ON_SALE(1, "上架"),
+    SALE_OUT(0, "下架")
     ;
     private Integer state;
 

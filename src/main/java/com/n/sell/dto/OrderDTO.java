@@ -1,24 +1,17 @@
-package com.n.sell.entity;
+package com.n.sell.dto;
 
-
+import com.n.sell.entity.OrderDetail;
 import com.n.sell.enums.OrderStatus;
 import com.n.sell.enums.PayStatus;
 import lombok.Data;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
-@Entity
 @Data
-@DynamicUpdate
-@DynamicInsert
-public class OrderMaster {
+public class OrderDTO {
 
-    @Id
     private String orderId;
 
     private String buyerName;
@@ -38,4 +31,6 @@ public class OrderMaster {
     private Date createTime;
 
     private Date updateTime;
+
+    private List<OrderDetail> orderDetailList;
 }
