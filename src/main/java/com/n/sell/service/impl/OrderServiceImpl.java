@@ -14,7 +14,9 @@ import com.n.sell.repository.OrderDetailRepository;
 import com.n.sell.repository.OrderMasterRepository;
 import com.n.sell.repository.ProductInfoRepository;
 import com.n.sell.service.OrderService;
+import com.n.sell.service.PayService;
 import com.n.sell.service.ProductInfoService;
+import com.n.sell.service.PushMessageService;
 import com.n.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -45,6 +47,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ProductInfoService productInfoService;
+
+    @Autowired
+    private PayService payService;
+
+    @Autowired
+    private PushMessageService pushMessageService;
     @Override
     @Transactional
     public OrderDTO create(OrderDTO orderDTO) {
@@ -113,10 +121,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public OrderDTO cancel(OrderDTO orderDTO) {
+
         if(!orderDTO.getOrderStatus().equals(OrderStatusEnum.INIT.getCode())){
             log.error("[取消订单]失败，订单{}状态错误[{}]", orderDTO.getOrderId(),
                     orderDTO.getOrderStatus());
             throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
+        }
+
+        /* 如果已经支付成功了，先退款 */
+        if(orderDTO.getPayStatus().equals(PayStatusEnum.PAYED.getCode())){
+            payService.refund(orderDTO);
         }
 
         orderDTO.setOrderStatus(OrderStatusEnum.CLOSE.getCode());
@@ -131,10 +145,6 @@ public class OrderServiceImpl implements OrderService {
                 .map(e -> new CartDTO(e.getProductId(), e.getProductQuantity()))
                 .collect(Collectors.toList());
         productInfoService.increaseStock(cartDTOList);
-
-        if(orderDTO.getPayStatus().equals(PayStatusEnum.PAYED.getCode())){
-            //
-        }
 
         return orderDTO;
     }
@@ -156,6 +166,7 @@ public class OrderServiceImpl implements OrderService {
             throw new SellException(ResultEnum.SYSTEM_ERROR);
         }
 
+        pushMessageService.orderStatus(orderDTO);
         return orderDTO;
     }
 

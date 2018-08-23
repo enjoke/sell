@@ -13,6 +13,7 @@ public enum ResultEnum {
     CART_EMPTY(14,"购物车为空"),
     ORDER_OWNER_ERROR(15, "该订单不属于当前用户"),
     PRODUCT_STATUS_ERROR(16, "商品状态错误"),
+    LogIN_ERROR(17, "登录失败"),
     SYSTEM_ERROR(96, "系统故障"),
     ORDER_CANCEL_SUCCESS(100, "订单取消成功"),
     ORDER_FINISH_SUCCESS(101, "订单完结成功")

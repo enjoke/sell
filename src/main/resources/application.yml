@@ -9,9 +9,27 @@ spring:
     show-sql: true
   jackson:
     default-property-inclusion: non_null
+  redis:
+    host: 192.168.119.141
+    port: 6379
+    password:
 server:
   context-path: /sell
 
+
 wechat:
-  mpAppId:1
-  mpAppSeecret:1
+  mpAppId: wx5d6703326e4aa7ad
+  mpAppSecret: 742197ed8dd47ef3d7064c34e8b970f0
+  openAppId: wx5d6703326e4aa7ad
+  openAppSecret: 742197ed8dd47ef3d7064c34e8b970f0
+  mchId: 123456
+  mchKey: 123456
+  keyPath: 123456
+  notifyUrl: http://c84u3m.natappfree.cc/sell/pay/notify
+  templateId:
+    orderStatus: SG69M1L8PMV0GfQ09JTMT98ZXSDGJWBF_9ZvJZ0rFuE
+
+projectUrl:
+  wxMpAuthorizeUrl: http://c84u3m.natappfree.cc
+  wxOpenAuthorizeUrl: http://c84u3m.natappfree.cc
+  projectUrl: http://c84u3m.natappfree.cc

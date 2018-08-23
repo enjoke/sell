@@ -76,4 +76,29 @@
         </div>
 
     </body>
+<script>
+    var websocket = null;
+    if('WebSocket' in window){
+        websocket = new WebSocket('ws://');
+
+        websocket.onopen = function (event) {
+
+        }
+
+        websocket.onclose = function (event) {
+
+        }
+
+        websocket.onmessage = function (event) {
+
+        }
+
+        websocket.onerror = function (event) {
+        }
+
+        websocket.onbeforeunload = function (event) {
+
+        }
+    }
+</script>
 </html>
