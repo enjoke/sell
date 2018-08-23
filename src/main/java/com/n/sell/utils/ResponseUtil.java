@@ -2,17 +2,15 @@ package com.n.sell.utils;
 
 
 import com.n.sell.VO.ResponseVO;
-import com.n.sell.enums.ResultCode;
-
-import java.util.List;
+import com.n.sell.enums.ResultEnum;
 
 public class ResponseUtil {
 
-    public static ResponseVO success(List list){
+    public static ResponseVO success(Object object){
         ResponseVO responseVO = new ResponseVO();
-        responseVO.setCode(ResultCode.SUCCESS.getResultCode());
-        responseVO.setMsg(ResultCode.SUCCESS.getMsg());
-        responseVO.setData(list);
+        responseVO.setCode(ResultEnum.SUCCESS.getCode());
+        responseVO.setMsg(ResultEnum.SUCCESS.getMsg());
+        responseVO.setData(object);
         return responseVO;
     }
 }

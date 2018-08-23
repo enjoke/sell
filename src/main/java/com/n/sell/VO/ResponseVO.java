@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ResponseVO<T> {
 
-    private String code;
+    private Integer code;
 
     private String msg;
 

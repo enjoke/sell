@@ -1,8 +1,8 @@
 package com.n.sell.entity;
 
 
-import com.n.sell.enums.OrderStatus;
-import com.n.sell.enums.PayStatus;
+import com.n.sell.enums.OrderStatusEnum;
+import com.n.sell.enums.PayStatusEnum;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -31,9 +31,9 @@ public class OrderMaster {
 
     private BigDecimal orderAmount;
 
-    private Integer orderStatus = OrderStatus.INIT.getState();
+    private Integer orderStatus = OrderStatusEnum.INIT.getCode();
 
-    private Integer payStatus = PayStatus.UNPAID.getState();
+    private Integer payStatus = PayStatusEnum.UNPAID.getCode();
 
     private Date createTime;
 

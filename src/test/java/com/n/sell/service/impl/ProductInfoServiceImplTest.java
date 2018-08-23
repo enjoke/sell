@@ -2,7 +2,7 @@ package com.n.sell.service.impl;
 
 
 import com.n.sell.entity.ProductInfo;
-import com.n.sell.enums.ProductStatus;
+import com.n.sell.enums.ProductStatusEnum;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class ProductInfoServiceImplTest {
 
     @Test
     public void findAll() {
-        PageRequest request = new PageRequest(0, 2);
+        PageRequest request = new PageRequest(0, 10);
         Page<ProductInfo> productInfoPage = service.findAll(request);
         Assert.assertNotEquals(0, productInfoPage.getTotalElements());
     }
@@ -55,10 +55,24 @@ public class ProductInfoServiceImplTest {
         productInfo.setProductPrice(new BigDecimal(3.2));
         productInfo.setProductDescription("sungsumg");
         productInfo.setProductIcon("2333");
-        productInfo.setProductStatus(ProductStatus.ON_SALE.getState());
+        productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
         productInfo.setProductStock(100);
         productInfo.setCategoryType(1);
         ProductInfo result = service.save(productInfo);
         Assert.assertNotNull(result);
+    }
+
+    @Test
+    public void onSale(){
+        ProductInfo productInfo = service.findOne("00010001");
+        Assert.assertTrue("商品上架",
+                service.onSale(productInfo.getProductId()).getProductStatus().equals(ProductStatusEnum.UP.getCode()));
+    }
+
+    @Test
+    public void offSale(){
+        ProductInfo productInfo = service.findOne("00010001");
+        Assert.assertTrue("商品下架",
+                service.offSale(productInfo.getProductId()).getProductStatus().equals(ProductStatusEnum.DOWN.getCode()));
     }
 }
